@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Simulation</title>
+    <script src = 
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+            </script>
+    <style>
+        .center {
+            background-color: rgba(255, 250, 250, 0.877);
+          width:60%;
+          
+          border: 15px solid rgb(105, 155, 247);
+          padding: 50px;
+          margin: 50px;
+        }
+        td, th {
+  border: 1px solid #282cf0;
+  text-align: left;
+  padding: 8px;
+}
+table {
+  border-spacing: 1px;
+}
+        </style>
+  
+</head>
+<body>
+  <center>
+
+    <div id="main" class="center" style="text-align: center;  background-color: lightgray; " >
+        <h1>Active Simulation</h1>
+    <hr>
+        <!-- Boat hull Id-<span id="hin"></span><br>
+        Boat Engines-<span id="eng"></span><br>
+        Longitude-<span id="log"></span><br>
+        Latitude-<span id="lat"></span><br>
+        Speed-<span id="speed"></span>Mph -->
+
+        <center>
+          <table>
+            <tr>
+              <th>Boat hull Id</th>
+              <th>Engines</th>
+              <th>Longitude</th>
+              <th>Latitude</th>
+              <th>Speed</th>
+  
+            </tr>
+            <tr>
+              <td><p id="hin"></p></td>
+              <td><span id="eng"></span>  </td>
+              <td><span id="log"></span>  </td>
+              <td> <span id="lat"></span></td>
+              <td><span id="speed"></span></td>
+              
+            </tr>
+          </table>
+        </center>
+    <hr>
+    <a href="Main.html"><input type="button" value="Edit" ></a>
+      </div>
+  </center>
+
+  <script>
+    document.getElementById("hin").innerHTML=localStorage.getItem("hid");
+    document.getElementById("eng").innerHTML=localStorage.getItem("eng");
+    document.getElementById("log").innerHTML=localStorage.getItem("log");
+    document.getElementById("lat").innerHTML=localStorage.getItem("lat");
+    document.getElementById("speed").innerHTML=localStorage.getItem("speed");
+  </script>
+
+ 
+
+</body>
+</html>

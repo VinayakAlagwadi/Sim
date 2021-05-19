@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<script>
+
+
+function AddRow()
+{
+	
+	
+           
+	
+const url="http://localhost:8083/ActiveBoat"
+          $.ajax({
+            url:url,
+            type:"GET",
+            success: function(data){
+                alert(data)
+
+    }
+          })
+
+        }
+
+ function updateData(){
+          
+            let obj={}
+            const url="http://localhost:8083/boat"
+           
+            obj.hid=$("#hull_id").val()
+            obj.eng=$("#engines").val()
+            obj.log=$("#log").val()
+            obj.lat=$("#lat").val()
+            obj.speed=$("#speed").val()
+            obj.od=$("#od").val()
+            obj.speed=$("#speed").val()
+           	$(".check:checked").each(function(){
+    		obj.ck=$(this).val();
+});
+            console.log(JSON.stringify(obj));
+            
+            $.ajax({
+            url:url,
+            type:"POST",
+            data:JSON.stringify(obj),
+            contentType:"application/text; charset=utf-8",
+            dataType:"text",
+            
+            success: function(data){
+                alert(data)
+                
+               const button = document.getElementById("start");
+               button.disabled=true;
+               const button1 = document.getElementById("stop");
+               button1.disabled=false;
+
+                
+            }
+          })
+        }
+
+
+
+
+
+      function postData(){
+          
+            let obj={}
+            const url="http://localhost:8083/startboat"
+           
+            obj.hid=$("#hull_id").val()
+            obj.eng=$("#engines").val()
+            obj.log=$("#log").val()
+            obj.lat=$("#lat").val()
+            obj.od=$("#od").val()
+            obj.speed=$("#speed").val()
+           	$(".check:checked").each(function(){
+    		obj.ck=$(this).val();
+});
+            
+            console.log(JSON.stringify(obj));
+            
+            $.ajax({
+            url:url,
+            type:"POST",
+            data:JSON.stringify(obj),
+            contentType:"application/text; charset=utf-8",
+            dataType:"text",
+            
+            success: function(data){
+                alert(data)
+                
+               const button = document.getElementById("start");
+               button.disabled=true;
+               const button1 = document.getElementById("stop");
+               button1.disabled=false;
+
+                
+            }
+          })
+        }
+
+          function stopData(){
+          const url="http://localhost:8083/stopboat"
+          $.ajax({
+            url:url,
+            type:"GET",
+            success: function(data){
+                alert(data)
+               
+            }
+          })
+
+        }
+
+</script>
+
+<script>
+$(document).ready(function(){
+    $('.check').click(function() {
+        $('.check').not(this).prop('checked', false);
+    });
+});
+</script>
+
+
+
+
+
+    <title>Boat Simulator</title>
+    <style>
+        div {
+            background-color: rgba(255, 255, 255, 0.877);
+          width:60%;
+          
+          border: 15px solid rgb(105, 155, 247);
+          padding: 50px;
+          margin: 50px; 
+        }
+        html {
+  background: url() no-repeat center center fixed;
+  background-size: cover;
+  height: 80%;
+  overflow: hidden;
+}
+
+
+
+table{
+	margin-top: 50px;
+	text-align: center;
+	background: rgb(255, 255, 255, 0.877);
+	color: #2226f3;
+}
+
+#show th, #show td{
+	padding: 13px;
+}
+
+
+html { overflow-y: scroll; overflow-x:hidden; }
+body { position: relative;  }
+
+input:hover{
+    background-color: rgb(80, 243, 255);
+    color: white;
+    transition: .5s;
+    cursor: pointer;
+  }
+  button:hover{
+    background-color: rgb(254, 255, 255);
+    color: rgb(20, 19, 19);
+    transition: .5s;
+    cursor: pointer;
+  }
+
+        </style>
+
+        
+</head>
+<body style="background-color: rgb(125, 182, 235);" >
+   <center><h2 style="color: azure; background-color: blue ;"><b style="font-size: larger; font-family: 'Times New Roman', Times, serif;  ">BOAT SIMULATOR </b></h2></center> 
+ 
+
+
+<center><div >
+
+
+    <form action="/boat"  method="POST">
+        <th>
+        <tr>
+        Boat Hull ID -   <input type="text" name="hull_id" id="hull_id" value="XYZ1111221" readonly> &emsp;&emsp;&emsp;&emsp;  
+        </tr>
+       </th>
+       
+       <th>
+        <tr>
+        No of Engines -    <input 
+         type="number" name="no" id="engines"> 
+ 		</tr>
+       </th>
+       
+        <hr>
+        LOG - <input type="number" name="log" id="log"> &emsp;&emsp;&emsp;&emsp;
+        LAT - <input type="number" name="lat" id="lat"> <br><hr>
+              
+
+        Boat Speed - <input type="range" name = "rangeInput" value="10" min="10" max="200" id="speed" oninput="this.nextElementSibling.value = this.value">
+        <output>10</output> Mph  
+
+ &emsp;&emsp;Boat Door - Open <input type="checkbox" name="skill" class="check" value="open"> Close<input type="checkbox" name="skill" class="check" value="closed"> 
+          <br><br>
+          
+           &emsp;&emsp;Ocean Depth  <input type="number" name="od" id="od"> 
+          <br><br>
+          
+   <!--     
+	Boat Door - 
+  	<input type="checkbox" name="skill" class="check" value="open"> Open
+	<input type="checkbox" name="skill" class="check" value="closed"> Closed
+        --> <!-- 
+          <div>
+        &emsp;&emsp;Boat Door - Open <input type="checkbox" name="door" id="door_open "class="radio" value="1">Close<input type="checkbox" name="door" id="door_close" "class="radio" value="1">
+          <br><br>
+          </div>-->
+          <!-- <a href="new.html"> <input type="button" value="START" name="START" id="start_btn" style="background-color: rgb(243, 72, 66);"  onclick="myFunction()" >
+          </a> -->
+        
+        <!-- <script>
+          function myFunction() {
+            document.getElementById("demo").innerHTML = "Boat Started";
+          }
+          </script> -->
+
+        <!-- &emsp;&emsp; -->
+
+        <!-- <input type="button" name="STOP" id="stop_btn" value="STOP" style="background-color: rgb(49, 197, 36);" onclick="myFunction1()"> -->
+
+        <!-- <script>
+          function myFunction1() {
+            document.getElementById("demo").innerHTML = "Boat Stoped";
+          }
+          </script> -->
+          
+        &emsp;&emsp;
+
+                <a href=""><input  type="button" id="start" value="StartSimulation" style="background-color: dodgerblue; " onclick="postData()"></a>
+
+                <a href=""><input  type="button" id="stop" value="StopSimulation" style="background-color: dodgerblue; " onclick="stopData()" ></a>
+
+                <input  type="button" id="update_btn" value="UPDATE" style="background-color: dodgerblue;  " onclick="updateData()" >
+
+
+               <input  type="button" id="updatebtn" value="Active Simulation" style="background-color: dodgerblue; " onclick="AddRow()"></a>
+
+              <!-- <a href="boatEvent.html">        
+                <input  type="button" id="event" value="BoatEvent" style="background-color: dodgerblue; " onclick="">
+               </a> -->
+        <hr>
+
+       
+    
+    </form>
+    <img src="https://www.hinckleyyachts.com/wp-content/uploads/2020/09/46120459-Edit-2-1280x600.jpg.webp" alt="Avatar" style="width:100%;">
+   
+</div>
+
+
+
+
+</body>
+</html>
